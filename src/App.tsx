@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Store } from "./Context";
 
 function App(): JSX.Element {
+  const { initialState } = useContext(Store);
+  console.log({ initialState });
   return (
     <>
       <h1>Rick and Morty</h1>
