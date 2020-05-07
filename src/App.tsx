@@ -35,11 +35,13 @@ function App(): JSX.Element {
   };
   return (
     <>
-      <h1>Rick and Morty</h1>
-      <p>Pick your favorite episode</p>
-      <section>
+      <header className="header">
+        <h1>Rick and Morty</h1>
+        <p>Pick your favorite episode</p>
+      </header>
+      <section className="episode-layout">
         {state.episodes.map((episode: IEpisode) => (
-          <section key={episode.id}>
+          <section key={episode.id} className="episode-box">
             {episode.image !== null ? (
               <img
                 src={episode.image.medium}

@@ -1,0 +1,39 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  font-size: 10px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.header {
+  display: flex;
+  position: sticky;
+  top: 0;
+  justify-content: space-between;
+  background: #fff;
+  border-bottom: 1px solid #111;
+  padding: 0.5rem;
+}
+
+.episode-layout {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  min-width: 100vw;
+}
+
+.episode-box {
+  position: relative;
+  padding: 0.5rem;
+}
