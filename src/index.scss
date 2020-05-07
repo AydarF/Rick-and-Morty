@@ -18,12 +18,15 @@ body {
 
 .header {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   position: sticky;
   top: 0;
-  justify-content: space-between;
-  background: #fff;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
   border-bottom: 1px solid #111;
   padding: 0.5rem;
+  z-index: 999;
 }
 
 .episode-layout {
