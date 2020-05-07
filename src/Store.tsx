@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useReducer } from "react";
+import { reducer } from "./Reducer";
 
 interface IState {
   episodes: [];
@@ -13,7 +14,12 @@ const initialState: IState = {
 const Store = React.createContext<IState | any>(initialState);
 
 function StoreProvider(props: any): JSX.Element {
-  return <Store.Provider value={initialState}>{props.children}</Store.Provider>;
+  const [state, dispatch] = useReducer(reducer, initialState);
+  return (
+    <Store.Provider value={{ state, dispatch }}>
+      {props.children}
+    </Store.Provider>
+  );
 }
 
 export { StoreProvider, Store };

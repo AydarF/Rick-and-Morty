@@ -1,13 +1,12 @@
-import React, { useContext } from "react";
-import { Store } from "./Context";
+import React from "react";
+import { FetchData } from "./FetchData";
 
 function App(): JSX.Element {
-  const { initialState } = useContext(Store);
-  console.log({ initialState });
   return (
     <>
       <h1>Rick and Morty</h1>
       <p>Pick your favorite episode</p>
+      <FetchData></FetchData>
     </>
   );
 }
