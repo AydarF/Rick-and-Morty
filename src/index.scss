@@ -37,3 +37,12 @@ body {
   position: relative;
   padding: 0.5rem;
 }
+
+.episode-image-unavailable {
+  width: 250px;
+  height: 140px;
+  line-height: 140px;
+  white-space: nowrap;
+  background: lightgray;
+  text-align: center;
+}

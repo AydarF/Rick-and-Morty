@@ -48,7 +48,9 @@ function App(): JSX.Element {
                 alt={`Rick and Morty ${episode.name}`}
               />
             ) : (
-              ""
+              <div className="episode-image-unavailable">
+                No Image Available At This Time
+              </div>
             )}
             <div>{episode.name}</div>
             <section>
