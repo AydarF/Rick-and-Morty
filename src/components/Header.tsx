@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Link } from "@reach/router";
+import { Store } from "../Store";
 
 const Header = (props: any): JSX.Element => {
-  const { favorites } = props;
+  const { state } = useContext(Store);
 
   return (
     <>
@@ -9,8 +11,13 @@ const Header = (props: any): JSX.Element => {
         <h1>Rick and Morty</h1>
         <span>
           <p>Pick your favorite episode</p>
-          <p>Favorite episodes: {favorites.length}</p>
         </span>
+        <div>
+          <Link to="/">Home</Link>
+          <Link to="/favorites">
+            Favorite episodes: {state.favorites.length}
+          </Link>
+        </div>
       </header>
     </>
   );
