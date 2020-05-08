@@ -1,6 +1,10 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, Suspense } from "react";
 import { Store } from "./Store";
-import { IEpisode, IAction } from "./Interfaces";
+import { IEpisode, IAction, IEpisodeProps } from "./Interfaces";
+
+import Header from "./components/Header";
+
+const Episode = React.lazy<any>(() => import("./components/Episode"));
 
 function App(): JSX.Element {
   const { state, dispatch } = useContext(Store);
@@ -41,44 +45,32 @@ function App(): JSX.Element {
     return dispatch(dispatchObj);
   };
 
-  console.log(state);
+  const props: IEpisodeProps = {
+    episodes: state.episodes,
+    toggleFavorite,
+    favorites: state.favorites,
+  };
 
   return (
     <>
-      <header className="header">
-        <h1>Rick and Morty</h1>
-        <span>
-          <p>Pick your favorite episode</p>
-          <p>Favorite episodes: {state.favorites.length}</p>
-        </span>
-      </header>
-      <section className="episode-layout">
-        {state.episodes.map((episode: IEpisode) => (
-          <section key={episode.id} className="episode-box">
-            {episode.image !== null ? (
-              <img
-                src={episode.image.medium}
-                alt={`Rick and Morty ${episode.name}`}
-              />
-            ) : (
-              <div className="episode-image-unavailable">
-                No Image Available At This Time
-              </div>
-            )}
-            <div>{episode.name}</div>
-            <section>
-              <div>
-                Season: {episode.season} Number: {episode.number}
-              </div>
-              <button type="button" onClick={() => toggleFavorite(episode)}>
-                {state.favorites.find((fav: IEpisode) => fav.id === episode.id)
-                  ? "Remove Episode"
-                  : "Add Episode"}
-              </button>
-            </section>
-          </section>
-        ))}
-      </section>
+      <Header {...props} />
+      <Suspense
+        fallback={
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              color: "#fff",
+            }}
+          >
+            Loading...
+          </div>
+        }
+      >
+        <section className="episode-layout">
+          <Episode {...props} />
+        </section>
+      </Suspense>
     </>
   );
 }
