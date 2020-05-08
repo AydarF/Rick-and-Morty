@@ -1,10 +1,6 @@
 import React, { useReducer } from "react";
 import { reducer } from "./Reducer";
-
-interface IState {
-  episodes: [];
-  favorites: [];
-}
+import { IState } from "./Interfaces";
 
 const initialState: IState = {
   episodes: [],
