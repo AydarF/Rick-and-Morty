@@ -1,6 +1,7 @@
 import React, { useEffect, useContext, Suspense } from "react";
 import { Store } from "../Store";
-import { IEpisode, IAction, IEpisodeProps } from "../Interfaces";
+import { IEpisodeProps } from "../Interfaces";
+import { fetchDataAction, toggleFavorite } from "../Actions";
 
 const Episode = React.lazy<any>(() => import("../components/Episode"));
 
@@ -8,43 +9,12 @@ const Home = () => {
   const { state, dispatch } = useContext(Store);
 
   useEffect(() => {
-    state.episodes.length === 0 && fetchDataAction();
+    state.episodes.length === 0 && fetchDataAction(dispatch);
   });
-
-  const fetchDataAction = async () => {
-    const url =
-      "https://api.tvmaze.com/singlesearch/shows?q=rick-&-marty&embed=episodes";
-
-    const data = await fetch(url);
-    const dataJSON = await data.json();
-    return dispatch({
-      type: "FETCH_DATA",
-      payload: dataJSON._embedded.episodes,
-    });
-  };
-
-  const toggleFavorite = (episode: IEpisode): IAction => {
-    const favEpisode = state.favorites.includes(episode);
-
-    let dispatchObj = {
-      type: "ADD_FAV",
-      payload: episode,
-    };
-
-    if (favEpisode) {
-      const favWithoutEpisode = state.favorites.filter(
-        (fav: IEpisode) => fav.id !== episode.id
-      );
-      dispatchObj = {
-        type: "REMOVE_FAV",
-        payload: favWithoutEpisode,
-      };
-    }
-    return dispatch(dispatchObj);
-  };
 
   const props: IEpisodeProps = {
     episodes: state.episodes,
+    store: { state, dispatch },
     toggleFavorite,
     favorites: state.favorites,
   };

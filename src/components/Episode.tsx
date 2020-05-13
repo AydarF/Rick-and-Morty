@@ -2,7 +2,9 @@ import React from "react";
 import { IEpisode } from "../Interfaces";
 
 const Episode = (props: any): Array<JSX.Element> => {
-  const { episodes, favorites, toggleFavorite } = props;
+  const { episodes, favorites, toggleFavorite, store } = props;
+  const { state, dispatch } = store;
+
   return episodes.map((episode: IEpisode) => (
     <section key={episode.id} className="episode-box">
       {episode.image !== null ? (
@@ -21,7 +23,10 @@ const Episode = (props: any): Array<JSX.Element> => {
         <div>
           Season: {episode.season} Number: {episode.number}
         </div>
-        <button type="button" onClick={() => toggleFavorite(episode)}>
+        <button
+          type="button"
+          onClick={() => toggleFavorite(state, dispatch, episode)}
+        >
           {favorites.find((fav: IEpisode) => fav.id === episode.id)
             ? "Remove Episode"
             : "Add Episode"}
